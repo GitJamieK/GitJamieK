@@ -10,6 +10,6 @@ If an idea pops into my head, chances are I'll build it and ship it.
 **Tech stack:** C#, C++, Lua, JavaScript · Unity, Unreal · Neovim on Arch Linux (btw) 🐧
 
 **Find me here:**
-- 🌐 [jamiek.cc](https://jamiek.cc/) — portfolio
-- 🧩 [addons.jamiek.cc](https://addons.jamiek.cc/) — my WoW addons
-- 💼 [LinkedIn](https://www.linkedin.com/in/jamie-kofler) · ✉️ [koflerjamie@gmail.com](mailto:koflerjamie@gmail.com)
+🌐 [jamiek.cc](https://jamiek.cc/) — portfolio
+🧩 [addons.jamiek.cc](https://addons.jamiek.cc/) — my WoW addons
+💼 [LinkedIn](https://www.linkedin.com/in/jamie-kofler) · ✉️ [koflerjamie@gmail.com](mailto:koflerjamie@gmail.com)
