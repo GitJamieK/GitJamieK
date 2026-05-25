@@ -7,7 +7,7 @@ Before that, I spent ~3 years at a professional game studio where I helped ship 
 
 If an idea pops into my head, chances are I'll build it and ship it.
 
-**Tech stack:** C#, C++, Lua, JavaScript · Unity, Unreal · Neovim on Arch Linux 🐧
+**Tech stack:** C#, C++, Lua, JavaScript · Unity, Unreal · Neovim on Arch Linux (btw) 🐧
 
 **Find me here:**
 - 🌐 [jamiek.cc](https://jamiek.cc/) — portfolio
