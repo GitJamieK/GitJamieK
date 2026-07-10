@@ -143,6 +143,15 @@ def stat_leader(length, value='0'):
     if jl>2: return ' '+'.'*jl+' '
     return {0:'',1:' ',2:'. '}[jl]
 
+def tight_leader(length, value='0'):
+    # Placeholder leader whose (leader+value) width == length exactly, matching what
+    # today.py produces for real (multi-digit) LOC numbers. Avoids the +2 overshoot
+    # stat_leader adds for a 1-char '0', so the committed zero-state ends at the edge too.
+    n=max(0, length-len(value))
+    if n==0: return ''
+    if n==1: return ' '
+    return ' '+'.'*(n-2)+' '
+
 def stat_cell(label, vid, dots_id, length, value='0'):
     return (f'<tspan class="key">{label}</tspan>:'
             f'<tspan class="cc" id="{dots_id}">{stat_leader(length,value)}</tspan>'
@@ -188,9 +197,9 @@ def panel():
              '<tspan class="key">Lines of Code</tspan>:'
              f'<tspan class="cc" id="loc_data_dots">{stat_leader(STAT_LEN["loc"])}</tspan>'
              '<tspan class="value" id="loc_data">0</tspan> (  '
-             f'<tspan class="cc" id="loc_add_dots">{stat_leader(STAT_LEN["loc_add"])}</tspan>'
+             f'<tspan class="cc" id="loc_add_dots">{tight_leader(STAT_LEN["loc_add"])}</tspan>'
              '<tspan class="addColor" id="loc_add">0</tspan><tspan class="addColor">++</tspan>, '
-             f'<tspan class="cc" id="loc_del_dots">{stat_leader(STAT_LEN["loc_del"])}</tspan>'
+             f'<tspan class="cc" id="loc_del_dots">{tight_leader(STAT_LEN["loc_del"])}</tspan>'
              '<tspan class="delColor" id="loc_del">0</tspan><tspan class="delColor">--</tspan> )')
     return '\n'.join(L)
 
