@@ -135,7 +135,8 @@ def blank(y):
 # GitHub-Stats field widths. Each number is right-justified to (label_end + LEN + 2),
 # giving fixed columns so the 2-column grid stays aligned at any digit count.
 # MUST match the justify_format lengths in today.py's svg_overwrite().
-STAT_LEN = {'repo':20,'star':19,'commit':18,'follower':15,'contrib':14,'loc':9,'loc_del':7}
+STAT_LEN = {'repo':20,'star':19,'commit':18,'follower':15,'contrib':14,
+            'loc':12,'loc_add':10,'loc_del':8}
 
 def stat_leader(length, value='0'):
     jl=max(0, length-len(value))
@@ -181,12 +182,15 @@ def panel():
              + SEP + stat_cell('Followers','follower_data','follower_data_dots',STAT_LEN['follower']))
     L.append(f'<tspan x="{PANEL_X}" y="490" class="cc">. </tspan>'
              + stat_cell('Contributed','contrib_data','contrib_data_dots',STAT_LEN['contrib']))
+    # total right-justifies to col 30 (so the "(" lands under the "|" above);
+    # additions/deletions right-justify so the closing ")" reaches the far edge.
     L.append(f'<tspan x="{PANEL_X}" y="510" class="cc">. </tspan>'
              '<tspan class="key">Lines of Code</tspan>:'
              f'<tspan class="cc" id="loc_data_dots">{stat_leader(STAT_LEN["loc"])}</tspan>'
-             '<tspan class="value" id="loc_data">0</tspan> ( '
+             '<tspan class="value" id="loc_data">0</tspan> (  '
+             f'<tspan class="cc" id="loc_add_dots">{stat_leader(STAT_LEN["loc_add"])}</tspan>'
              '<tspan class="addColor" id="loc_add">0</tspan><tspan class="addColor">++</tspan>, '
-             '<tspan class="cc" id="loc_del_dots"> </tspan>'
+             f'<tspan class="cc" id="loc_del_dots">{stat_leader(STAT_LEN["loc_del"])}</tspan>'
              '<tspan class="delColor" id="loc_del">0</tspan><tspan class="delColor">--</tspan> )')
     return '\n'.join(L)
 
