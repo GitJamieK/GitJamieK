@@ -2,7 +2,11 @@
 """Generate dark_mode.svg + light_mode.svg for GitJamieK profile.
 Celebi ASCII colored by sampling Celebi_ascii.png per character cell.
 Right panel = fastfetch-style, dynamic stat ids preserved for today.py.
-Run from scratchpad. Writes into the GitJamieK repo dir.
+Run from the repo root:  python3 assets/gen_svg.py
+
+TO EDIT PANEL TEXT (labels like "Languages.Programming" or their values):
+  see the panel() function below — each line is  field(y, 'Label', 'Value').
+TO CHANGE LOOK: tweak the LAYOUT CONFIG constants right below.
 """
 from PIL import Image
 import numpy as np
@@ -12,15 +16,19 @@ PNG   = 'assets/Celebi_ascii.png'
 GRID  = 'assets/celebi.txt'
 OUTDIR= '.'
 
-# ---- layout constants (tuned after render) ----
-ASCII_X   = 15
-Y0        = 30
-DY        = 20
-CW        = 8.8      # approx char advance px (for panel placement only)
-PANEL_X   = 470
-WIDTH     = 1040
-HEIGHT    = 560
-TARGET    = 28       # value-start column for simple panel lines
+# ================= LAYOUT CONFIG (safe to tweak) =================
+ASCII_X    = 15
+CW         = 9.6     # px advance per monospace char (used only to place the panel)
+ASCII_DY   = 16      # art line height. LOWER => Celebi looks WIDER (fixes squish)
+ASCII_Y0   = 60      # art top baseline (centers the art beside the panel)
+PANEL_DY   = 20      # panel line height
+Y0         = 30      # panel top baseline
+GAP        = 20      # px gap between art and panel
+R          = 60      # panel values right-align to this column (chars); raise = wider panel
+ASCII_COLS = 50      # art grid width in chars
+PANEL_X    = ASCII_X + round(ASCII_COLS*CW) + GAP
+WIDTH      = PANEL_X + round(R*CW) + 40
+HEIGHT     = 515
 
 # ---- palettes (display fill per class) ----
 DARK = {'body':'#d69cc4','grn':'#5fae4c','mag':'#b25aa8','wht':'#f2f2f2','gry':'#797f8a'}
@@ -72,7 +80,7 @@ def sample_classes(grid, W):
 def ascii_tspans(grid, W, cls):
     out=[]
     for r,row in enumerate(grid):
-        y=Y0+r*DY
+        y=ASCII_Y0+r*ASCII_DY
         segs=[]; cur=None; buf=''
         for c in range(W):
             ch=row[c]
@@ -103,8 +111,9 @@ def key_markup(key):
 def line_start(x,y):
     return f'<tspan x="{PANEL_X}" y="{y}" class="cc">. </tspan>'
 
-def field(y, key, value, val_id=None, dots_id=None, target=TARGET):
-    ndots=max(1, target-len(key)-5)
+def field(y, key, value, val_id=None, dots_id=None):
+    # right-align value to column R with a dotted leader (fastfetch style)
+    ndots=max(1, R - (len(key)+3) - len(value) - 2)
     dots=' '+'.'*ndots+' '
     di=f' id="{dots_id}"' if dots_id else ''
     vi=f' id="{val_id}"' if val_id else ''
@@ -116,7 +125,8 @@ def field(y, key, value, val_id=None, dots_id=None, target=TARGET):
 def spacer(y):
     return f'<tspan x="{PANEL_X}" y="{y}" class="cc">. </tspan>'
 
-def header(y, title, dash=46):
+def header(y, title):
+    dash=max(1, R - len(title) - 1)
     return f'<tspan x="{PANEL_X}" y="{y}">{escape(title)}</tspan> {"—"*dash}'
 
 def blank(y):
@@ -124,7 +134,7 @@ def blank(y):
 
 def panel():
     L=[]
-    L.append(f'<tspan x="{PANEL_X}" y="{Y0}">jamie@kofler</tspan> {"—"*49}')
+    L.append(header(Y0, 'jamie@kofler'))
     L.append(field(50,  'OS',     'Arch Linux (btw), Windows'))
     L.append(field(70,  'Uptime', '00 years, 00 months, 00 days', val_id='age_data', dots_id='age_data_dots'))
     L.append(field(90,  'Host',   'Ratter Studios'))
@@ -137,14 +147,14 @@ def panel():
     L.append(spacer(230))
     L.append(field(250, 'Hobbies.Software', 'WoW Addon Dev, Game Jams'))
     L.append(blank(270))
-    L.append(header(290, '- Contact', 49))
+    L.append(header(290, '- Contact'))
     L.append(field(310, 'Email.Personal', 'koflerjamie@gmail.com'))
     L.append(field(330, 'Website',        'jamiek.cc'))
     L.append(field(350, 'Addons',         'addons.jamiek.cc'))
     L.append(field(370, 'LinkedIn',       'jamie-kofler'))
     L.append(field(390, 'Discord',        'jamie.'))
     L.append(blank(410))
-    L.append(header(430, '- GitHub Stats', 45))
+    L.append(header(430, '- GitHub Stats'))
     # dynamic stat lines: ids must match today.py
     L.append(f'<tspan x="{PANEL_X}" y="450" class="cc">. </tspan>'
              '<tspan class="key">Repos</tspan>:<tspan class="cc" id="repo_data_dots"> .... </tspan>'
@@ -194,7 +204,7 @@ def build(pal, ui, bg, textfill, ascii_body):
         f'width="{WIDTH}px" height="{HEIGHT}px" font-size="16px">\n'
         f'{style_block(pal, ui, bg)}\n'
         f'<rect width="{WIDTH}px" height="{HEIGHT}px" fill="{bg}" rx="15"/>\n'
-        f'<text x="{ASCII_X}" y="{Y0}" fill="{textfill}" class="ascii">\n{ascii_body}\n</text>\n'
+        f'<text x="{ASCII_X}" y="{ASCII_Y0}" fill="{textfill}" class="ascii">\n{ascii_body}\n</text>\n'
         f'<text x="{PANEL_X}" y="{Y0}" fill="{textfill}">\n{panel()}\n</text>\n'
         f'</svg>\n')
 

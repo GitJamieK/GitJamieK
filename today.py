@@ -303,7 +303,7 @@ def svg_overwrite(filename, age_data, commit_data, star_data, repo_data, contrib
     """
     tree = etree.parse(filename)
     root = tree.getroot()
-    find_and_replace(root, 'age_data', age_data) # age_data_dots kept static to stay left-aligned with other fields
+    justify_format(root, 'age_data', age_data, 49) # 49 = R-11 in gen_svg.py; right-aligns the uptime value
     justify_format(root, 'commit_data', commit_data, 22)
     justify_format(root, 'star_data', star_data, 14)
     justify_format(root, 'repo_data', repo_data, 6)
