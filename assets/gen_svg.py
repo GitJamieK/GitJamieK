@@ -20,7 +20,7 @@ OUTDIR= '.'
 ASCII_X    = 15
 CW         = 9.6     # px advance per monospace char (used only to place the panel)
 ASCII_DY   = 16      # art line height. LOWER => Celebi looks WIDER (fixes squish)
-ASCII_Y0   = 60      # art top baseline (centers the art beside the panel)
+ASCII_Y0   = 70      # art top baseline (centers the art beside the panel)
 PANEL_DY   = 20      # panel line height
 Y0         = 30      # panel top baseline
 GAP        = 20      # px gap between art and panel
@@ -28,7 +28,7 @@ R          = 60      # panel values right-align to this column (chars); raise = 
 ASCII_COLS = 50      # art grid width in chars
 PANEL_X    = ASCII_X + round(ASCII_COLS*CW) + GAP
 WIDTH      = PANEL_X + round(R*CW) + 40
-HEIGHT     = 515
+HEIGHT     = 535
 
 # ---- palettes (display fill per class) ----
 DARK = {'body':'#d69cc4','grn':'#5fae4c','mag':'#b25aa8','wht':'#f2f2f2','gry':'#797f8a'}
@@ -132,6 +132,21 @@ def header(y, title):
 def blank(y):
     return f'<tspan x="{PANEL_X}" y="{y}"> </tspan>'
 
+# GitHub-Stats field widths. Each number is right-justified to (label_end + LEN + 2),
+# giving fixed columns so the 2-column grid stays aligned at any digit count.
+# MUST match the justify_format lengths in today.py's svg_overwrite().
+STAT_LEN = {'repo':20,'star':19,'commit':18,'follower':15,'contrib':14,'loc':9,'loc_del':7}
+
+def stat_leader(length, value='0'):
+    jl=max(0, length-len(value))
+    if jl>2: return ' '+'.'*jl+' '
+    return {0:'',1:' ',2:'. '}[jl]
+
+def stat_cell(label, vid, dots_id, length, value='0'):
+    return (f'<tspan class="key">{label}</tspan>:'
+            f'<tspan class="cc" id="{dots_id}">{stat_leader(length,value)}</tspan>'
+            f'<tspan class="value" id="{vid}">{value}</tspan>')
+
 def panel():
     L=[]
     L.append(header(Y0, 'jamie@kofler'))
@@ -155,20 +170,23 @@ def panel():
     L.append(field(390, 'Discord',        'jamie.'))
     L.append(blank(410))
     L.append(header(430, '- GitHub Stats'))
-    # dynamic stat lines: ids must match today.py
+    # 2-column grid. Left numbers right-justify to column 30, right numbers to column 60,
+    # so nothing shifts when the values populate. ids must match today.py.
+    SEP='<tspan class="cc"> | </tspan>'   # 3 chars wide -> keeps the right column aligned
     L.append(f'<tspan x="{PANEL_X}" y="450" class="cc">. </tspan>'
-             '<tspan class="key">Repos</tspan>:<tspan class="cc" id="repo_data_dots"> .... </tspan>'
-             '<tspan class="value" id="repo_data">0</tspan> {<tspan class="key">Contributed</tspan>: '
-             '<tspan class="value" id="contrib_data">0</tspan>} | <tspan class="key">Stars</tspan>:'
-             '<tspan class="cc" id="star_data_dots"> ........... </tspan><tspan class="value" id="star_data">0</tspan>')
+             + stat_cell('Repos','repo_data','repo_data_dots',STAT_LEN['repo'])
+             + SEP + stat_cell('Stars','star_data','star_data_dots',STAT_LEN['star']))
     L.append(f'<tspan x="{PANEL_X}" y="470" class="cc">. </tspan>'
-             '<tspan class="key">Commits</tspan>:<tspan class="cc" id="commit_data_dots"> ................. </tspan>'
-             '<tspan class="value" id="commit_data">0</tspan> | <tspan class="key">Followers</tspan>:'
-             '<tspan class="cc" id="follower_data_dots"> ....... </tspan><tspan class="value" id="follower_data">0</tspan>')
+             + stat_cell('Commits','commit_data','commit_data_dots',STAT_LEN['commit'])
+             + SEP + stat_cell('Followers','follower_data','follower_data_dots',STAT_LEN['follower']))
     L.append(f'<tspan x="{PANEL_X}" y="490" class="cc">. </tspan>'
-             '<tspan class="key">Lines of Code on GitHub</tspan>:<tspan class="cc" id="loc_data_dots">. </tspan>'
-             '<tspan class="value" id="loc_data">0</tspan> ( <tspan class="addColor" id="loc_add">0</tspan>'
-             '<tspan class="addColor">++</tspan>, <tspan id="loc_del_dots"> </tspan>'
+             + stat_cell('Contributed','contrib_data','contrib_data_dots',STAT_LEN['contrib']))
+    L.append(f'<tspan x="{PANEL_X}" y="510" class="cc">. </tspan>'
+             '<tspan class="key">Lines of Code</tspan>:'
+             f'<tspan class="cc" id="loc_data_dots">{stat_leader(STAT_LEN["loc"])}</tspan>'
+             '<tspan class="value" id="loc_data">0</tspan> ( '
+             '<tspan class="addColor" id="loc_add">0</tspan><tspan class="addColor">++</tspan>, '
+             '<tspan class="cc" id="loc_del_dots"> </tspan>'
              '<tspan class="delColor" id="loc_del">0</tspan><tspan class="delColor">--</tspan> )')
     return '\n'.join(L)
 

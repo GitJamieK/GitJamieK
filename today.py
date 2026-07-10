@@ -43,11 +43,17 @@ def format_plural(unit):
 def simple_request(func_name, query, variables):
     """
     Returns a request, or raises an Exception if the response does not succeed.
+    Retries transient 5xx / rate-limit responses (GitHub's API 502s under load)
+    with exponential backoff before giving up.
     """
-    request = requests.post('https://api.github.com/graphql', json={'query': query, 'variables':variables}, headers=HEADERS)
-    if request.status_code == 200:
-        return request
-    raise Exception(func_name, ' has failed with a', request.status_code, request.text, QUERY_COUNT)
+    for attempt in range(5):
+        request = requests.post('https://api.github.com/graphql', json={'query': query, 'variables':variables}, headers=HEADERS)
+        if request.status_code == 200:
+            return request
+        if request.status_code in (429, 500, 502, 503, 504) and attempt < 4:
+            time.sleep(2 ** attempt)  # 1, 2, 4, 8 seconds
+            continue
+        raise Exception(func_name, ' has failed with a', request.status_code, request.text, QUERY_COUNT)
 
 
 def graph_commits(start_date, end_date):
@@ -144,11 +150,18 @@ def recursive_loc(owner, repo_name, data, cache_comment, addition_total=0, delet
         }
     }'''
     variables = {'repo_name': repo_name, 'owner': owner, 'cursor': cursor}
-    request = requests.post('https://api.github.com/graphql', json={'query': query, 'variables':variables}, headers=HEADERS) # I cannot use simple_request(), because I want to save the file before raising Exception
-    if request.status_code == 200:
-        if request.json()['data']['repository']['defaultBranchRef'] != None: # Only count commits if repo isn't empty
-            return loc_counter_one_repo(owner, repo_name, data, cache_comment, request.json()['data']['repository']['defaultBranchRef']['target']['history'], addition_total, deletion_total, my_commits)
-        else: return 0
+    # I cannot use simple_request(), because I want to save the file before raising Exception.
+    # Retry transient 5xx (GitHub GraphQL returns 502 Bad Gateway under load) with backoff.
+    for attempt in range(5):
+        request = requests.post('https://api.github.com/graphql', json={'query': query, 'variables':variables}, headers=HEADERS)
+        if request.status_code == 200:
+            if request.json()['data']['repository']['defaultBranchRef'] != None: # Only count commits if repo isn't empty
+                return loc_counter_one_repo(owner, repo_name, data, cache_comment, request.json()['data']['repository']['defaultBranchRef']['target']['history'], addition_total, deletion_total, my_commits)
+            else: return 0
+        if request.status_code in (429, 500, 502, 503, 504) and attempt < 4:
+            time.sleep(2 ** attempt)  # 1, 2, 4, 8 seconds
+            continue
+        break
     force_close_file(data, cache_comment) # saves what is currently in the file before this program crashes
     if request.status_code == 403:
         raise Exception('Too many requests in a short amount of time!\nYou\'ve hit the non-documented anti-abuse limit!')
@@ -304,11 +317,14 @@ def svg_overwrite(filename, age_data, commit_data, star_data, repo_data, contrib
     tree = etree.parse(filename)
     root = tree.getroot()
     justify_format(root, 'age_data', age_data, 49) # 49 = R-11 in gen_svg.py; right-aligns the uptime value
-    justify_format(root, 'commit_data', commit_data, 22)
-    justify_format(root, 'star_data', star_data, 14)
-    justify_format(root, 'repo_data', repo_data, 6)
-    justify_format(root, 'contrib_data', contrib_data)
-    justify_format(root, 'follower_data', follower_data, 10)
+    # widths below right-justify each number to a fixed column so the 2-column
+    # GitHub-Stats grid stays aligned regardless of how many digits each value has.
+    # They must match STAT_LEN in assets/gen_svg.py.
+    justify_format(root, 'repo_data', repo_data, 20)       # left col  -> ends at char 30
+    justify_format(root, 'star_data', star_data, 19)       # right col -> ends at char 60
+    justify_format(root, 'commit_data', commit_data, 18)   # left col
+    justify_format(root, 'follower_data', follower_data, 15) # right col
+    justify_format(root, 'contrib_data', contrib_data, 14) # left col
     justify_format(root, 'loc_data', loc_data[2], 9)
     justify_format(root, 'loc_add', loc_data[0])
     justify_format(root, 'loc_del', loc_data[1], 7)
