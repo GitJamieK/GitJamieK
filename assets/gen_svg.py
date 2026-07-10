@@ -18,17 +18,23 @@ OUTDIR= '.'
 
 # ================= LAYOUT CONFIG (safe to tweak) =================
 ASCII_X    = 15
-CW         = 9.6     # px advance per monospace char (used only to place the panel)
+ASCII_FONT = 16      # art font-size px
+ASCII_CW   = 9.6     # px advance per art char (= ASCII_FONT*0.6)
 ASCII_DY   = 16      # art line height. LOWER => Celebi looks WIDER (fixes squish)
-ASCII_Y0   = 70      # art top baseline (centers the art beside the panel)
-PANEL_DY   = 20      # panel line height
-Y0         = 30      # panel top baseline
-GAP        = 20      # px gap between art and panel
-R          = 60      # panel values right-align to this column (chars); raise = wider panel
 ASCII_COLS = 50      # art grid width in chars
-PANEL_X    = ASCII_X + round(ASCII_COLS*CW) + GAP
-WIDTH      = PANEL_X + round(R*CW) + 40
-HEIGHT     = 535
+ASCII_ROWS = 26      # art grid height in rows
+PANEL_FONT = 18      # panel font-size px (larger than the art)
+PANEL_CW   = 10.8    # px advance per panel char (= PANEL_FONT*0.6)
+PANEL_DY   = 19      # panel line height (smaller ratio => more compact)
+PANEL_LINES= 24      # number of panel rows
+Y0         = 30      # panel top baseline
+GAP        = 24      # px gap between art and panel
+R          = 60      # panel values right-align to this column (chars); raise = wider panel
+PANEL_X    = ASCII_X + round(ASCII_COLS*ASCII_CW) + GAP
+WIDTH      = PANEL_X + round(R*PANEL_CW) + 36
+# vertically center the art beside the panel
+ASCII_Y0   = Y0 + round(((PANEL_LINES-1)*PANEL_DY - (ASCII_ROWS-1)*ASCII_DY)/2)
+HEIGHT     = max(Y0 + (PANEL_LINES-1)*PANEL_DY, ASCII_Y0 + (ASCII_ROWS-1)*ASCII_DY) + 26
 
 # ---- palettes (display fill per class) ----
 DARK = {'body':'#d69cc4','grn':'#5fae4c','mag':'#b25aa8','wht':'#f2f2f2','gry':'#797f8a'}
@@ -135,8 +141,8 @@ def blank(y):
 # GitHub-Stats field widths. Each number is right-justified to (label_end + LEN + 2),
 # giving fixed columns so the 2-column grid stays aligned at any digit count.
 # MUST match the justify_format lengths in today.py's svg_overwrite().
-STAT_LEN = {'repo':20,'star':19,'commit':18,'follower':15,'contrib':14,
-            'loc':12,'loc_add':10,'loc_del':8}
+STAT_LEN = {'repo':7,'contrib':3,'star':14,'commit':23,'follower':10,
+            'loc':17,'loc_add':8,'loc_del':6}
 
 def stat_leader(length, value='0'):
     jl=max(0, length-len(value))
@@ -157,51 +163,70 @@ def stat_cell(label, vid, dots_id, length, value='0'):
             f'<tspan class="cc" id="{dots_id}">{stat_leader(length,value)}</tspan>'
             f'<tspan class="value" id="{vid}">{value}</tspan>')
 
+SEP='<tspan class="cc"> | </tspan>'
+
+def stats_repos(y):
+    # Combined line: "Repos <n> {Contributed: <n>} | Stars <n>".
+    return (f'<tspan x="{PANEL_X}" y="{y}" class="cc">. </tspan>'
+            '<tspan class="key">Repos</tspan>:'
+            f'<tspan class="cc" id="repo_data_dots">{stat_leader(STAT_LEN["repo"])}</tspan>'
+            '<tspan class="value" id="repo_data">0</tspan>'
+            ' {<tspan class="key">Contributed</tspan>:'
+            f'<tspan class="cc" id="contrib_data_dots">{tight_leader(STAT_LEN["contrib"])}</tspan>'
+            '<tspan class="value" id="contrib_data">0</tspan>}'
+            + SEP +
+            '<tspan class="key">Stars</tspan>:'
+            f'<tspan class="cc" id="star_data_dots">{stat_leader(STAT_LEN["star"])}</tspan>'
+            '<tspan class="value" id="star_data">0</tspan>')
+
+def stats_commits(y):
+    return (f'<tspan x="{PANEL_X}" y="{y}" class="cc">. </tspan>'
+            + stat_cell('Commits','commit_data','commit_data_dots',STAT_LEN['commit'])
+            + SEP + stat_cell('Followers','follower_data','follower_data_dots',STAT_LEN['follower']))
+
+def stats_loc(y):
+    # total right-justifies so "(" lands under the "|"; deletions so ")" hits the edge.
+    return (f'<tspan x="{PANEL_X}" y="{y}" class="cc">. </tspan>'
+            '<tspan class="key">Lines of Code</tspan>:'
+            f'<tspan class="cc" id="loc_data_dots">{stat_leader(STAT_LEN["loc"])}</tspan>'
+            '<tspan class="value" id="loc_data">0</tspan> ( '
+            f'<tspan class="cc" id="loc_add_dots">{tight_leader(STAT_LEN["loc_add"])}</tspan>'
+            '<tspan class="addColor" id="loc_add">0</tspan><tspan class="addColor">++</tspan>, '
+            f'<tspan class="cc" id="loc_del_dots">{tight_leader(STAT_LEN["loc_del"])}</tspan>'
+            '<tspan class="delColor" id="loc_del">0</tspan><tspan class="delColor">--</tspan> )')
+
 def panel():
-    L=[]
-    L.append(header(Y0, 'jamie@kofler'))
-    L.append(field(50,  'OS',     'Arch Linux (btw), Windows'))
-    L.append(field(70,  'Uptime', '00 years, 00 months, 00 days', val_id='age_data', dots_id='age_data_dots'))
-    L.append(field(90,  'Host',   'Ratter Studios'))
-    L.append(field(110, 'Kernel', 'Game Programmer'))
-    L.append(field(130, 'IDE',    'Neovim, Rider'))
-    L.append(spacer(150))
-    L.append(field(170, 'Languages.Programming', 'C#, C++, Lua, JavaScript'))
-    L.append(field(190, 'Languages.Computer',    'HTML, CSS, JSON, YAML'))
-    L.append(field(210, 'Languages.Real',        'English, Swedish, German'))
-    L.append(spacer(230))
-    L.append(field(250, 'Hobbies.Software', 'WoW Addon Dev, Game Jams'))
-    L.append(blank(270))
-    L.append(header(290, '- Contact'))
-    L.append(field(310, 'Email.Personal', 'koflerjamie@gmail.com'))
-    L.append(field(330, 'Website',        'jamiek.cc'))
-    L.append(field(350, 'Addons',         'addons.jamiek.cc'))
-    L.append(field(370, 'LinkedIn',       'jamie-kofler'))
-    L.append(field(390, 'Discord',        'jamie.'))
-    L.append(blank(410))
-    L.append(header(430, '- GitHub Stats'))
-    # 2-column grid. Left numbers right-justify to column 30, right numbers to column 60,
-    # so nothing shifts when the values populate. ids must match today.py.
-    SEP='<tspan class="cc"> | </tspan>'   # 3 chars wide -> keeps the right column aligned
-    L.append(f'<tspan x="{PANEL_X}" y="450" class="cc">. </tspan>'
-             + stat_cell('Repos','repo_data','repo_data_dots',STAT_LEN['repo'])
-             + SEP + stat_cell('Stars','star_data','star_data_dots',STAT_LEN['star']))
-    L.append(f'<tspan x="{PANEL_X}" y="470" class="cc">. </tspan>'
-             + stat_cell('Commits','commit_data','commit_data_dots',STAT_LEN['commit'])
-             + SEP + stat_cell('Followers','follower_data','follower_data_dots',STAT_LEN['follower']))
-    L.append(f'<tspan x="{PANEL_X}" y="490" class="cc">. </tspan>'
-             + stat_cell('Contributed','contrib_data','contrib_data_dots',STAT_LEN['contrib']))
-    # total right-justifies to col 30 (so the "(" lands under the "|" above);
-    # additions/deletions right-justify so the closing ")" reaches the far edge.
-    L.append(f'<tspan x="{PANEL_X}" y="510" class="cc">. </tspan>'
-             '<tspan class="key">Lines of Code</tspan>:'
-             f'<tspan class="cc" id="loc_data_dots">{stat_leader(STAT_LEN["loc"])}</tspan>'
-             '<tspan class="value" id="loc_data">0</tspan> (  '
-             f'<tspan class="cc" id="loc_add_dots">{tight_leader(STAT_LEN["loc_add"])}</tspan>'
-             '<tspan class="addColor" id="loc_add">0</tspan><tspan class="addColor">++</tspan>, '
-             f'<tspan class="cc" id="loc_del_dots">{tight_leader(STAT_LEN["loc_del"])}</tspan>'
-             '<tspan class="delColor" id="loc_del">0</tspan><tspan class="delColor">--</tspan> )')
+    L=[]; y=Y0
+    def push(s):
+        nonlocal y; L.append(s); y+=PANEL_DY
+    push(header(y, 'jamie@kofler'))
+    push(field(y, 'OS',     'Arch Linux (btw), Windows'))
+    push(field(y, 'Uptime', '00 years, 00 months, 00 days', val_id='age_data', dots_id='age_data_dots'))
+    push(field(y, 'Host',   'Ratter Studios'))
+    push(field(y, 'Kernel', 'Game Programmer'))
+    push(field(y, 'IDE',    'Neovim, Rider'))
+    push(spacer(y))
+    push(field(y, 'Languages.Programming', 'C#, C++, Lua, JavaScript'))
+    push(field(y, 'Languages.Computer',    'HTML, CSS, JSON, YAML'))
+    push(field(y, 'Languages.Real',        'English, Swedish, German'))
+    push(spacer(y))
+    push(field(y, 'Hobbies.Software', 'WoW Addon Dev, Game Jams'))
+    push(blank(y))
+    push(header(y, '- Contact'))
+    push(field(y, 'Email.Personal', 'koflerjamie@gmail.com'))
+    push(field(y, 'Website',        'jamiek.cc'))
+    push(field(y, 'Addons',         'addons.jamiek.cc'))
+    push(field(y, 'LinkedIn',       'jamie-kofler'))
+    push(field(y, 'Discord',        'jamie.'))
+    push(blank(y))
+    push(header(y, '- GitHub Stats'))
+    push(stats_repos(y))
+    push(stats_commits(y))
+    push(stats_loc(y))
     return '\n'.join(L)
+
+def panel_bottom():
+    return Y0 + 23*PANEL_DY   # y of the last (24th) panel line
 
 # ================= assemble =================
 def style_block(pal, ascii_fill, bg_note):
@@ -232,11 +257,11 @@ LIGHT_UI={'key':'#953800','value':'#0a3069','add':'#1a7f37','del':'#cf222e','cc'
 def build(pal, ui, bg, textfill, ascii_body):
     return (f"<?xml version='1.0' encoding='UTF-8'?>\n"
         f'<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" '
-        f'width="{WIDTH}px" height="{HEIGHT}px" font-size="16px">\n'
+        f'width="{WIDTH}px" height="{HEIGHT}px" font-size="{ASCII_FONT}px">\n'
         f'{style_block(pal, ui, bg)}\n'
         f'<rect width="{WIDTH}px" height="{HEIGHT}px" fill="{bg}" rx="15"/>\n'
         f'<text x="{ASCII_X}" y="{ASCII_Y0}" fill="{textfill}" class="ascii">\n{ascii_body}\n</text>\n'
-        f'<text x="{PANEL_X}" y="{Y0}" fill="{textfill}">\n{panel()}\n</text>\n'
+        f'<text x="{PANEL_X}" y="{Y0}" fill="{textfill}" font-size="{PANEL_FONT}px">\n{panel()}\n</text>\n'
         f'</svg>\n')
 
 def main():

@@ -14,6 +14,13 @@ HEADERS = {'authorization': 'token '+ os.environ['ACCESS_TOKEN']}
 USER_NAME = os.environ['USER_NAME'] # e.g. 'GitJamieK'
 QUERY_COUNT = {'user_getter': 0, 'follower_getter': 0, 'graph_repos_stars': 0, 'recursive_loc': 0, 'graph_commits': 0, 'loc_query': 0}
 
+# Repos excluded from the Lines-of-Code total. These are Unity projects whose committed
+# Library/asset/.meta files inflate the count by millions of "lines". Their commits and
+# the repo count are unaffected — only their LOC additions/deletions are skipped.
+LOC_EXCLUDE = {'GitJamieK/GP1_GRP04', 'GitJamieK/VampSurvEX',
+               'GitJamieK/AI---Project-Kim', 'GitJamieK/NPA'}
+LOC_EXCLUDE_HASHES = {hashlib.sha256(n.encode('utf-8')).hexdigest() for n in LOC_EXCLUDE}
+
 
 def daily_readme(birthday):
     """
@@ -269,6 +276,7 @@ def cache_builder(edges, comment_size, force_cache, loc_add=0, loc_del=0):
         f.writelines(data)
     for line in data:
         loc = line.split()
+        if loc[0] in LOC_EXCLUDE_HASHES: continue  # skip asset-inflated repos' LOC
         loc_add += int(loc[3])
         loc_del += int(loc[4])
     return [loc_add, loc_del, loc_add - loc_del, cached]
@@ -317,17 +325,17 @@ def svg_overwrite(filename, age_data, commit_data, star_data, repo_data, contrib
     tree = etree.parse(filename)
     root = tree.getroot()
     justify_format(root, 'age_data', age_data, 49) # 49 = R-11 in gen_svg.py; right-aligns the uptime value
-    # widths below right-justify each number to a fixed column so the 2-column
-    # GitHub-Stats grid stays aligned regardless of how many digits each value has.
-    # They must match STAT_LEN in assets/gen_svg.py.
-    justify_format(root, 'repo_data', repo_data, 20)       # left col  -> ends at char 30
-    justify_format(root, 'star_data', star_data, 19)       # right col -> ends at char 60
-    justify_format(root, 'commit_data', commit_data, 18)   # left col
-    justify_format(root, 'follower_data', follower_data, 15) # right col
-    justify_format(root, 'contrib_data', contrib_data, 14) # left col
-    justify_format(root, 'loc_data', loc_data[2], 12)  # total -> right edge at char 30 ("(" under the "|")
-    justify_format(root, 'loc_add', loc_data[0], 10)
-    justify_format(root, 'loc_del', loc_data[1], 8)    # deletions -> ")" reaches the far edge
+    # Combined-line layout: "Repos {Contributed} | Stars" / "Commits | Followers".
+    # Widths chosen so both "|" align, Stars/Followers end at the right edge, and the
+    # LOC "(" sits under the "|". Must match STAT_LEN in assets/gen_svg.py.
+    justify_format(root, 'repo_data', repo_data, 7)
+    justify_format(root, 'contrib_data', contrib_data, 3)
+    justify_format(root, 'star_data', star_data, 14)
+    justify_format(root, 'commit_data', commit_data, 23)
+    justify_format(root, 'follower_data', follower_data, 10)
+    justify_format(root, 'loc_data', loc_data[2], 17)  # total -> "(" under the "|"
+    justify_format(root, 'loc_add', loc_data[0], 8)
+    justify_format(root, 'loc_del', loc_data[1], 6)    # deletions -> ")" at the far edge
     tree.write(filename, encoding='utf-8', xml_declaration=True)
 
 
