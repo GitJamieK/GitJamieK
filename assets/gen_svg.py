@@ -18,20 +18,20 @@ OUTDIR= '.'
 
 # ================= LAYOUT CONFIG (safe to tweak) =================
 ASCII_X    = 15
-ASCII_FONT = 16      # art font-size px
-ASCII_CW   = 9.6     # px advance per art char (= ASCII_FONT*0.6)
-ASCII_DY   = 16      # art line height. LOWER => Celebi looks WIDER (fixes squish)
+ASCII_FONT = 18      # art font-size px
+ASCII_CW   = 10.8    # px advance per art char (= ASCII_FONT*0.6)
+ASCII_DY   = 18      # art line height (= ASCII_CW/0.6 keeps the Celebi at correct scale)
 ASCII_COLS = 50      # art grid width in chars
 ASCII_ROWS = 26      # art grid height in rows
-PANEL_FONT = 18      # panel font-size px (larger than the art)
-PANEL_CW   = 10.8    # px advance per panel char (= PANEL_FONT*0.6)
-PANEL_DY   = 19      # panel line height (smaller ratio => more compact)
+PANEL_FONT = 20      # panel font-size px (larger than the art)
+PANEL_CW   = 12      # px advance per panel char (= PANEL_FONT*0.6)
+PANEL_DY   = 21      # panel line height (smaller ratio => more compact)
 PANEL_LINES= 24      # number of panel rows
 Y0         = 30      # panel top baseline
-GAP        = 24      # px gap between art and panel
-R          = 60      # panel values right-align to this column (chars); raise = wider panel
+GAP        = 16      # px gap between art and panel
+R          = 53      # panel values right-align to this column (chars); lower => tighter panel
 PANEL_X    = ASCII_X + round(ASCII_COLS*ASCII_CW) + GAP
-WIDTH      = PANEL_X + round(R*PANEL_CW) + 36
+WIDTH      = PANEL_X + round(R*PANEL_CW) + 34
 # vertically center the art beside the panel
 ASCII_Y0   = Y0 + round(((PANEL_LINES-1)*PANEL_DY - (ASCII_ROWS-1)*ASCII_DY)/2)
 HEIGHT     = max(Y0 + (PANEL_LINES-1)*PANEL_DY, ASCII_Y0 + (ASCII_ROWS-1)*ASCII_DY) + 26
@@ -141,8 +141,8 @@ def blank(y):
 # GitHub-Stats field widths. Each number is right-justified to (label_end + LEN + 2),
 # giving fixed columns so the 2-column grid stays aligned at any digit count.
 # MUST match the justify_format lengths in today.py's svg_overwrite().
-STAT_LEN = {'repo':7,'contrib':3,'star':14,'commit':23,'follower':10,
-            'loc':17,'loc_add':8,'loc_del':6}
+STAT_LEN = {'repo':3,'contrib':3,'star':13,'commit':17,'follower':9,
+            'loc':11,'loc_add':8,'loc_del':6}
 
 def stat_leader(length, value='0'):
     jl=max(0, length-len(value))
@@ -169,7 +169,7 @@ def stats_repos(y):
     # Combined line: "Repos <n> {Contributed: <n>} | Stars <n>".
     return (f'<tspan x="{PANEL_X}" y="{y}" class="cc">. </tspan>'
             '<tspan class="key">Repos</tspan>:'
-            f'<tspan class="cc" id="repo_data_dots">{stat_leader(STAT_LEN["repo"])}</tspan>'
+            f'<tspan class="cc" id="repo_data_dots">{tight_leader(STAT_LEN["repo"])}</tspan>'
             '<tspan class="value" id="repo_data">0</tspan>'
             ' {<tspan class="key">Contributed</tspan>:'
             f'<tspan class="cc" id="contrib_data_dots">{tight_leader(STAT_LEN["contrib"])}</tspan>'
@@ -189,7 +189,7 @@ def stats_loc(y):
     return (f'<tspan x="{PANEL_X}" y="{y}" class="cc">. </tspan>'
             '<tspan class="key">Lines of Code</tspan>:'
             f'<tspan class="cc" id="loc_data_dots">{stat_leader(STAT_LEN["loc"])}</tspan>'
-            '<tspan class="value" id="loc_data">0</tspan> ( '
+            '<tspan class="value" id="loc_data">0</tspan> ('
             f'<tspan class="cc" id="loc_add_dots">{tight_leader(STAT_LEN["loc_add"])}</tspan>'
             '<tspan class="addColor" id="loc_add">0</tspan><tspan class="addColor">++</tspan>, '
             f'<tspan class="cc" id="loc_del_dots">{tight_leader(STAT_LEN["loc_del"])}</tspan>'

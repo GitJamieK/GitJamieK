@@ -324,16 +324,16 @@ def svg_overwrite(filename, age_data, commit_data, star_data, repo_data, contrib
     """
     tree = etree.parse(filename)
     root = tree.getroot()
-    justify_format(root, 'age_data', age_data, 49) # 49 = R-11 in gen_svg.py; right-aligns the uptime value
+    justify_format(root, 'age_data', age_data, 42) # = R-11 in gen_svg.py; right-aligns the uptime value
     # Combined-line layout: "Repos {Contributed} | Stars" / "Commits | Followers".
     # Widths chosen so both "|" align, Stars/Followers end at the right edge, and the
     # LOC "(" sits under the "|". Must match STAT_LEN in assets/gen_svg.py.
-    justify_format(root, 'repo_data', repo_data, 7)
+    justify_format(root, 'repo_data', repo_data, 3)
     justify_format(root, 'contrib_data', contrib_data, 3)
-    justify_format(root, 'star_data', star_data, 14)
-    justify_format(root, 'commit_data', commit_data, 23)
-    justify_format(root, 'follower_data', follower_data, 10)
-    justify_format(root, 'loc_data', loc_data[2], 17)  # total -> "(" under the "|"
+    justify_format(root, 'star_data', star_data, 13)
+    justify_format(root, 'commit_data', commit_data, 17)
+    justify_format(root, 'follower_data', follower_data, 9)
+    justify_format(root, 'loc_data', loc_data[2], 11)  # total -> "(" under the "|"
     justify_format(root, 'loc_add', loc_data[0], 8)
     justify_format(root, 'loc_del', loc_data[1], 6)    # deletions -> ")" at the far edge
     tree.write(filename, encoding='utf-8', xml_declaration=True)
