@@ -51,17 +51,17 @@ text, tspan {white-space: pre;}
 </text>
 <text x="571" y="30" fill="#c9d1d9" font-size="20px">
 <tspan x="571" y="30">jamie@kofler</tspan> ————————————————————————————————————————
-<tspan x="571" y="51" class="cc">. </tspan><tspan class="key">OS</tspan>:<tspan class="cc"> ..................... </tspan><tspan class="value">Arch Linux (btw), Windows</tspan>
-<tspan x="571" y="72" class="cc">. </tspan><tspan class="key">Uptime</tspan>:<tspan class="cc" id="age_data_dots"> ............... </tspan><tspan class="value" id="age_data">24 years, 7 months, 21 days</tspan>
+<tspan x="571" y="51" class="cc">. </tspan><tspan class="key">OS</tspan>:<tspan class="cc"> .............. </tspan><tspan class="value">Arch Linux (btw), Windows, MacOS</tspan>
+<tspan x="571" y="72" class="cc">. </tspan><tspan class="key">Uptime</tspan>:<tspan class="cc" id="age_data_dots"> .............. </tspan><tspan class="value" id="age_data">00 years, 00 months, 00 days</tspan>
 <tspan x="571" y="93" class="cc">. </tspan><tspan class="key">Host</tspan>:<tspan class="cc"> .............................. </tspan><tspan class="value">Ratter Studios</tspan>
-<tspan x="571" y="114" class="cc">. </tspan><tspan class="key">Kernel</tspan>:<tspan class="cc"> ........................... </tspan><tspan class="value">Game Programmer</tspan>
-<tspan x="571" y="135" class="cc">. </tspan><tspan class="key">IDE</tspan>:<tspan class="cc"> ................................ </tspan><tspan class="value">Neovim, Rider</tspan>
+<tspan x="571" y="114" class="cc">. </tspan><tspan class="key">Kernel</tspan>:<tspan class="cc"> ................ </tspan><tspan class="value">Game Programmer, Tech Lead</tspan>
+<tspan x="571" y="135" class="cc">. </tspan><tspan class="key">IDE</tspan>:<tspan class="cc"> ........................ </tspan><tspan class="value">Neovim, Rider, VScode</tspan>
 <tspan x="571" y="156" class="cc">. </tspan>
-<tspan x="571" y="177" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Programming</tspan>:<tspan class="cc"> ... </tspan><tspan class="value">C#, C++, Lua, JavaScript</tspan>
+<tspan x="571" y="177" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Programming</tspan>:<tspan class="cc"> . </tspan><tspan class="value">C#, C++, Lua, TypeScript, Rust</tspan>
 <tspan x="571" y="198" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Computer</tspan>:<tspan class="cc"> ......... </tspan><tspan class="value">HTML, CSS, JSON, YAML</tspan>
 <tspan x="571" y="219" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Real</tspan>:<tspan class="cc"> .......... </tspan><tspan class="value">English, Swedish, German</tspan>
 <tspan x="571" y="240" class="cc">. </tspan>
-<tspan x="571" y="261" class="cc">. </tspan><tspan class="key">Hobbies</tspan>.<tspan class="key">Software</tspan>:<tspan class="cc"> ........ </tspan><tspan class="value">WoW Addon Dev, Game Jams</tspan>
+<tspan x="571" y="261" class="cc">. </tspan><tspan class="key">Hobbies</tspan>.<tspan class="key">Software</tspan>:<tspan class="cc"> ............... </tspan><tspan class="value">Gaming, RetroTech</tspan>
 <tspan x="571" y="282"> </tspan>
 <tspan x="571" y="303">- Contact</tspan> ———————————————————————————————————————————
 <tspan x="571" y="324" class="cc">. </tspan><tspan class="key">Email</tspan>.<tspan class="key">Personal</tspan>:<tspan class="cc"> ............. </tspan><tspan class="value">koflerjamie@gmail.com</tspan>
@@ -71,8 +71,8 @@ text, tspan {white-space: pre;}
 <tspan x="571" y="408" class="cc">. </tspan><tspan class="key">Discord</tspan>:<tspan class="cc"> ................................... </tspan><tspan class="value">jamie.</tspan>
 <tspan x="571" y="429"> </tspan>
 <tspan x="571" y="450">- GitHub Stats</tspan> ——————————————————————————————————————
-<tspan x="571" y="471" class="cc">. </tspan><tspan class="key">Repos</tspan>:<tspan class="cc" id="repo_data_dots"> </tspan><tspan class="value" id="repo_data">18</tspan> {<tspan class="key">Contributed</tspan>:<tspan class="cc" id="contrib_data_dots"> </tspan><tspan class="value" id="contrib_data">21</tspan>}<tspan class="cc"> | </tspan><tspan class="key">Stars</tspan>:<tspan class="cc" id="star_data_dots"> ............ </tspan><tspan class="value" id="star_data">3</tspan>
-<tspan x="571" y="492" class="cc">. </tspan><tspan class="key">Commits</tspan>:<tspan class="cc" id="commit_data_dots"> .............. </tspan><tspan class="value" id="commit_data">586</tspan><tspan class="cc"> | </tspan><tspan class="key">Followers</tspan>:<tspan class="cc" id="follower_data_dots"> ........ </tspan><tspan class="value" id="follower_data">1</tspan>
-<tspan x="571" y="513" class="cc">. </tspan><tspan class="key">Lines of Code</tspan>:<tspan class="cc" id="loc_data_dots"> .... </tspan><tspan class="value" id="loc_data">200,393</tspan> (<tspan class="cc" id="loc_add_dots"> </tspan><tspan class="addColor" id="loc_add">232,689</tspan><tspan class="addColor">++</tspan>, <tspan class="cc" id="loc_del_dots"></tspan><tspan class="delColor" id="loc_del">32,296</tspan><tspan class="delColor">--</tspan> )
+<tspan x="571" y="471" class="cc">. </tspan><tspan class="key">Repos</tspan>:<tspan class="cc" id="repo_data_dots">  </tspan><tspan class="value" id="repo_data">0</tspan> {<tspan class="key">Contributed</tspan>:<tspan class="cc" id="contrib_data_dots">  </tspan><tspan class="value" id="contrib_data">0</tspan>}<tspan class="cc"> | </tspan><tspan class="key">Stars</tspan>:<tspan class="cc" id="star_data_dots"> ............ </tspan><tspan class="value" id="star_data">0</tspan>
+<tspan x="571" y="492" class="cc">. </tspan><tspan class="key">Commits</tspan>:<tspan class="cc" id="commit_data_dots"> ................ </tspan><tspan class="value" id="commit_data">0</tspan><tspan class="cc"> | </tspan><tspan class="key">Followers</tspan>:<tspan class="cc" id="follower_data_dots"> ........ </tspan><tspan class="value" id="follower_data">0</tspan>
+<tspan x="571" y="513" class="cc">. </tspan><tspan class="key">Lines of Code</tspan>:<tspan class="cc" id="loc_data_dots"> .......... </tspan><tspan class="value" id="loc_data">0</tspan> (<tspan class="cc" id="loc_add_dots"> ..... </tspan><tspan class="addColor" id="loc_add">0</tspan><tspan class="addColor">++</tspan>, <tspan class="cc" id="loc_del_dots"> ... </tspan><tspan class="delColor" id="loc_del">0</tspan><tspan class="delColor">--</tspan> )
 </text>
 </svg>
