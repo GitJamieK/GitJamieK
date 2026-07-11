@@ -206,7 +206,7 @@ def panel():
     push(field(y, 'Kernel', 'Game Programmer, Tech Lead'))
     push(field(y, 'IDE',    'Neovim, Rider, VScode'))
     push(spacer(y))
-    push(field(y, 'Languages.Programming', 'C#, C++, Lua, TypeScript, Rust'))
+    push(field(y, 'Languages.Programming', 'C#, C++, Lua, TypeScript'))
     push(field(y, 'Languages.Computer',    'HTML, CSS, JSON, YAML'))
     push(field(y, 'Languages.Real',        'English, Swedish, German'))
     push(spacer(y))
