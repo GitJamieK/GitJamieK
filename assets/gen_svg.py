@@ -27,14 +27,20 @@ PANEL_FONT = 20      # panel font-size px (larger than the art)
 PANEL_CW   = 12      # px advance per panel char (= PANEL_FONT*0.6)
 PANEL_DY   = 21      # panel line height (smaller ratio => more compact)
 PANEL_LINES= 22      # number of panel rows (must equal the push() count in panel())
-Y0         = 30      # panel top baseline
+TOP_PAD    = 30      # min px above the first baseline
+BOTTOM_PAD = 26      # px below the last baseline once the canvas grows past MIN_HEIGHT
+MIN_HEIGHT = 539     # canvas floor: holds the card at its original height when the panel is short
 GAP        = 16      # px gap between art and panel
 R          = 53      # panel values right-align to this column (chars); lower => tighter panel
 PANEL_X    = ASCII_X + round(ASCII_COLS*ASCII_CW) + GAP
 WIDTH      = PANEL_X + round(R*PANEL_CW) + 34
-# vertically center the art beside the panel
-ASCII_Y0   = Y0 + round(((PANEL_LINES-1)*PANEL_DY - (ASCII_ROWS-1)*ASCII_DY)/2)
-HEIGHT     = max(Y0 + (PANEL_LINES-1)*PANEL_DY, ASCII_Y0 + (ASCII_ROWS-1)*ASCII_DY) + 26
+ART_H      = (ASCII_ROWS-1)*ASCII_DY    # baseline span of the ASCII block
+PANEL_H    = (PANEL_LINES-1)*PANEL_DY   # baseline span of the text panel
+HEIGHT     = max(MIN_HEIGHT, TOP_PAD + max(ART_H, PANEL_H) + BOTTOM_PAD)
+# centre each block in the canvas independently, so both stay balanced
+# no matter how many panel lines panel() pushes
+Y0         = round((HEIGHT - PANEL_H)/2)   # panel top baseline
+ASCII_Y0   = round((HEIGHT - ART_H)/2)     # art top baseline
 
 # ---- palettes (display fill per class) ----
 DARK = {'body':'#d69cc4','grn':'#5fae4c','mag':'#b25aa8','wht':'#f2f2f2','gry':'#797f8a'}
