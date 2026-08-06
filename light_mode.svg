@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="1241px" height="539px" font-size="18px">
+<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="1241px" height="502px" font-size="18px">
 <style>
 @font-face {
 src: local('Consolas'), local('Consolas Bold');
@@ -20,34 +20,34 @@ size-adjust: 109%;
 .gry {fill: #9aa0ab;}
 text, tspan {white-space: pre;}
 </style>
-<rect width="1241px" height="539px" fill="#f6f8fa" rx="15"/>
-<text x="15" y="46" fill="#24292f" class="ascii">
-<tspan class="body" x="15" y="46">                               S                  </tspan>
-<tspan class="body" x="15" y="64">            </tspan><tspan class="grn">?                 </tspan><tspan class="body">%%</tspan><tspan class="mag">:                 </tspan>
-<tspan class="body" x="15" y="82">         </tspan><tspan class="grn">**                  </tspan><tspan class="mag">%%%%*                </tspan>
-<tspan class="body" x="15" y="100">        </tspan><tspan class="wht">#</tspan><tspan class="grn">?                  </tspan><tspan class="mag">% %</tspan><tspan class="body">.</tspan><tspan class="mag">%:                </tspan>
-<tspan class="body" x="15" y="118">       ##                 ,;</tspan><tspan class="grn">* </tspan><tspan class="mag">%%,%                </tspan>
-<tspan class="body" x="15" y="136">      ##               </tspan><tspan class="grn">:*+,</tspan><tspan class="mag">%</tspan><tspan class="body">%</tspan><tspan class="mag">%</tspan><tspan class="body">%</tspan><tspan class="mag">%%%%               </tspan>
-<tspan class="body" x="15" y="154">     ##            S#S</tspan><tspan class="grn">%?</tspan><tspan class="body">SSSSSS</tspan><tspan class="mag">%</tspan><tspan class="body">%</tspan><tspan class="mag">%</tspan><tspan class="body">%%               </tspan>
-<tspan class="body" x="15" y="172">     ##       ########S##SS#SSSS</tspan><tspan class="mag">%</tspan><tspan class="body">SS               </tspan>
-<tspan class="body" x="15" y="190">     SS    ####### #####SSSSSS</tspan><tspan class="gry">,</tspan><tspan class="body">SS</tspan><tspan class="gry">,</tspan><tspan class="body">S               </tspan>
-<tspan class="body" x="15" y="208">     SS  ######## # #SSSSSSSS</tspan><tspan class="gry">,</tspan><tspan class="body">SSSSS               </tspan>
-<tspan class="body" x="15" y="226">      S S########S###SSSSSSSSSSS</tspan><tspan class="gry">+</tspan><tspan class="body">S</tspan><tspan class="gry">?               </tspan>
-<tspan class="body" x="15" y="244">      %</tspan><tspan class="gry">,</tspan><tspan class="body">S#######S</tspan><tspan class="gry">:</tspan><tspan class="body">###SSSSSSSSSSSSS                </tspan>
-<tspan class="body" x="15" y="262"> S    </tspan><tspan class="wht">%</tspan><tspan class="body">?</tspan><tspan class="gry">?</tspan><tspan class="body">S######%##SSSSSSSSSSSSSSS   </tspan><tspan class="wht">#######</tspan><tspan class="gry">*     </tspan>
-<tspan class="body" x="15" y="280">  SS% </tspan><tspan class="gry">:</tspan><tspan class="body">SS%SSS##</tspan><tspan class="gry">:</tspan><tspan class="body">#SSSSSSSSSSSSSSSS </tspan><tspan class="wht">#########       </tspan>
-<tspan class="body" x="15" y="298">#SSSS</tspan><tspan class="wht">@</tspan><tspan class="grn">+</tspan><tspan class="gry">;</tspan><tspan class="body">SSSSSSSSSSSS </tspan><tspan class="gry">,,, </tspan><tspan class="body">SSSSSSSS</tspan><tspan class="wht">########         </tspan>
-<tspan class="body" x="15" y="316">   SS</tspan><tspan class="wht">@@</tspan><tspan class="gry">,</tspan><tspan class="body">SSSSSSSSS </tspan><tspan class="gry">::.</tspan><tspan class="wht">@@</tspan><tspan class="gry">,,</tspan><tspan class="body">SSSSSSS</tspan><tspan class="wht">######S           </tspan>
-<tspan class="body" x="15" y="334">     </tspan><tspan class="wht">#</tspan><tspan class="grn">+</tspan><tspan class="gry">,</tspan><tspan class="body">SSSSSSSS</tspan><tspan class="gry">::.</tspan><tspan class="wht">@</tspan><tspan class="grn">+</tspan><tspan class="gry">.</tspan><tspan class="wht">@ </tspan><tspan class="gry">,</tspan><tspan class="body">SSSSSS</tspan><tspan class="wht">####</tspan><tspan class="gry">*              </tspan>
-<tspan class="body" x="15" y="352">      </tspan><tspan class="grn">*</tspan><tspan class="gry">,</tspan><tspan class="body">SSSSSSS</tspan><tspan class="gry">,, </tspan><tspan class="grn">;;+</tspan><tspan class="body">:</tspan><tspan class="wht">@</tspan><tspan class="gry">,,</tspan><tspan class="body">SSSSS</tspan><tspan class="gry">?;                  </tspan>
-<tspan class="body" x="15" y="370">       </tspan><tspan class="gry">,</tspan><tspan class="body">SSSSSSS</tspan><tspan class="gry">,,</tspan><tspan class="grn">;;+*</tspan><tspan class="wht">@@</tspan><tspan class="gry">,.</tspan><tspan class="body">SS% </tspan><tspan class="gry">* </tspan><tspan class="body">SSSSSSSSSS%     #  </tspan>
-<tspan class="body" x="15" y="388">        %%SSSSS</tspan><tspan class="gry">,,</tspan><tspan class="grn">*+*</tspan><tspan class="wht">@@</tspan><tspan class="gry">,.</tspan><tspan class="body">%%%%%%SSSSSSSSSS##########</tspan>
-<tspan class="body" x="15" y="406">          %%%%%%</tspan><tspan class="gry">,,,.,.</tspan><tspan class="body">%%%</tspan><tspan class="mag">**</tspan><tspan class="gry">;</tspan><tspan class="body">%%SSSSSSSSSSS#######</tspan><tspan class="gry">: </tspan>
-<tspan class="body" x="15" y="424">             %%%%%%%%%%%</tspan><tspan class="mag">*****</tspan><tspan class="gry">:</tspan><tspan class="mag">+ </tspan><tspan class="body">SSS               </tspan>
-<tspan class="body" x="15" y="442">                   %%%%%</tspan><tspan class="mag">****++++                  </tspan>
-<tspan class="body" x="15" y="460">                            </tspan><tspan class="mag">++++*                 </tspan>
-<tspan class="body" x="15" y="478">                            </tspan><tspan class="mag">****                  </tspan>
-<tspan class="body" x="15" y="496">                             </tspan><tspan class="mag">???                  </tspan>
+<rect width="1241px" height="502px" fill="#f6f8fa" rx="15"/>
+<text x="15" y="26" fill="#24292f" class="ascii">
+<tspan class="body" x="15" y="26">                               S                  </tspan>
+<tspan class="body" x="15" y="44">            </tspan><tspan class="grn">?                 </tspan><tspan class="body">%%</tspan><tspan class="mag">:                 </tspan>
+<tspan class="body" x="15" y="62">         </tspan><tspan class="grn">**                  </tspan><tspan class="mag">%%%%*                </tspan>
+<tspan class="body" x="15" y="80">        </tspan><tspan class="wht">#</tspan><tspan class="grn">?                  </tspan><tspan class="mag">% %</tspan><tspan class="body">.</tspan><tspan class="mag">%:                </tspan>
+<tspan class="body" x="15" y="98">       ##                 ,;</tspan><tspan class="grn">* </tspan><tspan class="mag">%%,%                </tspan>
+<tspan class="body" x="15" y="116">      ##               </tspan><tspan class="grn">:*+,</tspan><tspan class="mag">%</tspan><tspan class="body">%</tspan><tspan class="mag">%</tspan><tspan class="body">%</tspan><tspan class="mag">%%%%               </tspan>
+<tspan class="body" x="15" y="134">     ##            S#S</tspan><tspan class="grn">%?</tspan><tspan class="body">SSSSSS</tspan><tspan class="mag">%</tspan><tspan class="body">%</tspan><tspan class="mag">%</tspan><tspan class="body">%%               </tspan>
+<tspan class="body" x="15" y="152">     ##       ########S##SS#SSSS</tspan><tspan class="mag">%</tspan><tspan class="body">SS               </tspan>
+<tspan class="body" x="15" y="170">     SS    ####### #####SSSSSS</tspan><tspan class="gry">,</tspan><tspan class="body">SS</tspan><tspan class="gry">,</tspan><tspan class="body">S               </tspan>
+<tspan class="body" x="15" y="188">     SS  ######## # #SSSSSSSS</tspan><tspan class="gry">,</tspan><tspan class="body">SSSSS               </tspan>
+<tspan class="body" x="15" y="206">      S S########S###SSSSSSSSSSS</tspan><tspan class="gry">+</tspan><tspan class="body">S</tspan><tspan class="gry">?               </tspan>
+<tspan class="body" x="15" y="224">      %</tspan><tspan class="gry">,</tspan><tspan class="body">S#######S</tspan><tspan class="gry">:</tspan><tspan class="body">###SSSSSSSSSSSSS                </tspan>
+<tspan class="body" x="15" y="242"> S    </tspan><tspan class="wht">%</tspan><tspan class="body">?</tspan><tspan class="gry">?</tspan><tspan class="body">S######%##SSSSSSSSSSSSSSS   </tspan><tspan class="wht">#######</tspan><tspan class="gry">*     </tspan>
+<tspan class="body" x="15" y="260">  SS% </tspan><tspan class="gry">:</tspan><tspan class="body">SS%SSS##</tspan><tspan class="gry">:</tspan><tspan class="body">#SSSSSSSSSSSSSSSS </tspan><tspan class="wht">#########       </tspan>
+<tspan class="body" x="15" y="278">#SSSS</tspan><tspan class="wht">@</tspan><tspan class="grn">+</tspan><tspan class="gry">;</tspan><tspan class="body">SSSSSSSSSSSS </tspan><tspan class="gry">,,, </tspan><tspan class="body">SSSSSSSS</tspan><tspan class="wht">########         </tspan>
+<tspan class="body" x="15" y="296">   SS</tspan><tspan class="wht">@@</tspan><tspan class="gry">,</tspan><tspan class="body">SSSSSSSSS </tspan><tspan class="gry">::.</tspan><tspan class="wht">@@</tspan><tspan class="gry">,,</tspan><tspan class="body">SSSSSSS</tspan><tspan class="wht">######S           </tspan>
+<tspan class="body" x="15" y="314">     </tspan><tspan class="wht">#</tspan><tspan class="grn">+</tspan><tspan class="gry">,</tspan><tspan class="body">SSSSSSSS</tspan><tspan class="gry">::.</tspan><tspan class="wht">@</tspan><tspan class="grn">+</tspan><tspan class="gry">.</tspan><tspan class="wht">@ </tspan><tspan class="gry">,</tspan><tspan class="body">SSSSSS</tspan><tspan class="wht">####</tspan><tspan class="gry">*              </tspan>
+<tspan class="body" x="15" y="332">      </tspan><tspan class="grn">*</tspan><tspan class="gry">,</tspan><tspan class="body">SSSSSSS</tspan><tspan class="gry">,, </tspan><tspan class="grn">;;+</tspan><tspan class="body">:</tspan><tspan class="wht">@</tspan><tspan class="gry">,,</tspan><tspan class="body">SSSSS</tspan><tspan class="gry">?;                  </tspan>
+<tspan class="body" x="15" y="350">       </tspan><tspan class="gry">,</tspan><tspan class="body">SSSSSSS</tspan><tspan class="gry">,,</tspan><tspan class="grn">;;+*</tspan><tspan class="wht">@@</tspan><tspan class="gry">,.</tspan><tspan class="body">SS% </tspan><tspan class="gry">* </tspan><tspan class="body">SSSSSSSSSS%     #  </tspan>
+<tspan class="body" x="15" y="368">        %%SSSSS</tspan><tspan class="gry">,,</tspan><tspan class="grn">*+*</tspan><tspan class="wht">@@</tspan><tspan class="gry">,.</tspan><tspan class="body">%%%%%%SSSSSSSSSS##########</tspan>
+<tspan class="body" x="15" y="386">          %%%%%%</tspan><tspan class="gry">,,,.,.</tspan><tspan class="body">%%%</tspan><tspan class="mag">**</tspan><tspan class="gry">;</tspan><tspan class="body">%%SSSSSSSSSSS#######</tspan><tspan class="gry">: </tspan>
+<tspan class="body" x="15" y="404">             %%%%%%%%%%%</tspan><tspan class="mag">*****</tspan><tspan class="gry">:</tspan><tspan class="mag">+ </tspan><tspan class="body">SSS               </tspan>
+<tspan class="body" x="15" y="422">                   %%%%%</tspan><tspan class="mag">****++++                  </tspan>
+<tspan class="body" x="15" y="440">                            </tspan><tspan class="mag">++++*                 </tspan>
+<tspan class="body" x="15" y="458">                            </tspan><tspan class="mag">****                  </tspan>
+<tspan class="body" x="15" y="476">                             </tspan><tspan class="mag">???                  </tspan>
 </text>
 <text x="571" y="30" fill="#24292f" font-size="20px">
 <tspan x="571" y="30">jamie@kofler</tspan> ————————————————————————————————————————
@@ -67,12 +67,10 @@ text, tspan {white-space: pre;}
 <tspan x="571" y="324" class="cc">. </tspan><tspan class="key">Email</tspan>.<tspan class="key">Personal</tspan>:<tspan class="cc"> ............. </tspan><tspan class="value">koflerjamie@gmail.com</tspan>
 <tspan x="571" y="345" class="cc">. </tspan><tspan class="key">Website</tspan>:<tspan class="cc"> ................................ </tspan><tspan class="value">jamiek.cc</tspan>
 <tspan x="571" y="366" class="cc">. </tspan><tspan class="key">Addons</tspan>:<tspan class="cc"> .......................... </tspan><tspan class="value">addons.jamiek.cc</tspan>
-<tspan x="571" y="387" class="cc">. </tspan><tspan class="key">LinkedIn</tspan>:<tspan class="cc"> ............................ </tspan><tspan class="value">jamie-kofler</tspan>
-<tspan x="571" y="408" class="cc">. </tspan><tspan class="key">Discord</tspan>:<tspan class="cc"> ................................... </tspan><tspan class="value">jamie.</tspan>
-<tspan x="571" y="429"> </tspan>
-<tspan x="571" y="450">- GitHub Stats</tspan> ——————————————————————————————————————
-<tspan x="571" y="471" class="cc">. </tspan><tspan class="key">Repos</tspan>:<tspan class="cc" id="repo_data_dots"> </tspan><tspan class="value" id="repo_data">24</tspan> {<tspan class="key">Contributed</tspan>:<tspan class="cc" id="contrib_data_dots"> </tspan><tspan class="value" id="contrib_data">29</tspan>}<tspan class="cc"> | </tspan><tspan class="key">Stars</tspan>:<tspan class="cc" id="star_data_dots"> ............ </tspan><tspan class="value" id="star_data">4</tspan>
-<tspan x="571" y="492" class="cc">. </tspan><tspan class="key">Commits</tspan>:<tspan class="cc" id="commit_data_dots"> .............. </tspan><tspan class="value" id="commit_data">692</tspan><tspan class="cc"> | </tspan><tspan class="key">Followers</tspan>:<tspan class="cc" id="follower_data_dots"> ........ </tspan><tspan class="value" id="follower_data">1</tspan>
-<tspan x="571" y="513" class="cc">. </tspan><tspan class="key">Lines of Code</tspan>:<tspan class="cc" id="loc_data_dots"> .... </tspan><tspan class="value" id="loc_data">225,320</tspan> (<tspan class="cc" id="loc_add_dots"> </tspan><tspan class="addColor" id="loc_add">259,778</tspan><tspan class="addColor">++</tspan>, <tspan class="cc" id="loc_del_dots"></tspan><tspan class="delColor" id="loc_del">34,458</tspan><tspan class="delColor">--</tspan> )
+<tspan x="571" y="387"> </tspan>
+<tspan x="571" y="408">- GitHub Stats</tspan> ——————————————————————————————————————
+<tspan x="571" y="429" class="cc">. </tspan><tspan class="key">Repos</tspan>:<tspan class="cc" id="repo_data_dots"> </tspan><tspan class="value" id="repo_data">24</tspan> {<tspan class="key">Contributed</tspan>:<tspan class="cc" id="contrib_data_dots"> </tspan><tspan class="value" id="contrib_data">29</tspan>}<tspan class="cc"> | </tspan><tspan class="key">Stars</tspan>:<tspan class="cc" id="star_data_dots"> ............ </tspan><tspan class="value" id="star_data">4</tspan>
+<tspan x="571" y="450" class="cc">. </tspan><tspan class="key">Commits</tspan>:<tspan class="cc" id="commit_data_dots"> .............. </tspan><tspan class="value" id="commit_data">692</tspan><tspan class="cc"> | </tspan><tspan class="key">Followers</tspan>:<tspan class="cc" id="follower_data_dots"> ........ </tspan><tspan class="value" id="follower_data">1</tspan>
+<tspan x="571" y="471" class="cc">. </tspan><tspan class="key">Lines of Code</tspan>:<tspan class="cc" id="loc_data_dots"> .... </tspan><tspan class="value" id="loc_data">225,320</tspan> (<tspan class="cc" id="loc_add_dots"> </tspan><tspan class="addColor" id="loc_add">259,778</tspan><tspan class="addColor">++</tspan>, <tspan class="cc" id="loc_del_dots"></tspan><tspan class="delColor" id="loc_del">34,458</tspan><tspan class="delColor">--</tspan> )
 </text>
 </svg>

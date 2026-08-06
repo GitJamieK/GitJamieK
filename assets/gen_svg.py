@@ -26,7 +26,7 @@ ASCII_ROWS = 26      # art grid height in rows
 PANEL_FONT = 20      # panel font-size px (larger than the art)
 PANEL_CW   = 12      # px advance per panel char (= PANEL_FONT*0.6)
 PANEL_DY   = 21      # panel line height (smaller ratio => more compact)
-PANEL_LINES= 24      # number of panel rows
+PANEL_LINES= 22      # number of panel rows (must equal the push() count in panel())
 Y0         = 30      # panel top baseline
 GAP        = 16      # px gap between art and panel
 R          = 53      # panel values right-align to this column (chars); lower => tighter panel
@@ -216,8 +216,6 @@ def panel():
     push(field(y, 'Email.Personal', 'koflerjamie@gmail.com'))
     push(field(y, 'Website',        'jamiek.cc'))
     push(field(y, 'Addons',         'addons.jamiek.cc'))
-    push(field(y, 'LinkedIn',       'jamie-kofler'))
-    push(field(y, 'Discord',        'jamie.'))
     push(blank(y))
     push(header(y, '- GitHub Stats'))
     push(stats_repos(y))
@@ -226,7 +224,7 @@ def panel():
     return '\n'.join(L)
 
 def panel_bottom():
-    return Y0 + 23*PANEL_DY   # y of the last (24th) panel line
+    return Y0 + (PANEL_LINES-1)*PANEL_DY   # y of the last panel line
 
 # ================= assemble =================
 def style_block(pal, ascii_fill, bg_note):
