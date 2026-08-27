@@ -52,7 +52,7 @@ text, tspan {white-space: pre;}
 <text x="571" y="49" fill="#24292f" font-size="20px">
 <tspan x="571" y="49">jamie@kofler</tspan> ————————————————————————————————————————
 <tspan x="571" y="70" class="cc">. </tspan><tspan class="key">OS</tspan>:<tspan class="cc"> .............. </tspan><tspan class="value">Arch Linux (btw), Windows, MacOS</tspan>
-<tspan x="571" y="91" class="cc">. </tspan><tspan class="key">Uptime</tspan>:<tspan class="cc" id="age_data_dots"> ................ </tspan><tspan class="value" id="age_data">24 years, 9 months, 6 days</tspan>
+<tspan x="571" y="91" class="cc">. </tspan><tspan class="key">Uptime</tspan>:<tspan class="cc" id="age_data_dots"> ................ </tspan><tspan class="value" id="age_data">24 years, 9 months, 7 days</tspan>
 <tspan x="571" y="112" class="cc">. </tspan><tspan class="key">Host</tspan>:<tspan class="cc"> .............................. </tspan><tspan class="value">Ratter Studios</tspan>
 <tspan x="571" y="133" class="cc">. </tspan><tspan class="key">Kernel</tspan>:<tspan class="cc"> ................ </tspan><tspan class="value">Game Programmer, Tech Lead</tspan>
 <tspan x="571" y="154" class="cc">. </tspan><tspan class="key">IDE</tspan>:<tspan class="cc"> ........................ </tspan><tspan class="value">Neovim, Rider, VScode</tspan>
