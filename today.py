@@ -26,6 +26,19 @@ QUERY_COUNT = {'user_getter': 0, 'follower_getter': 0, 'graph_repos_stars': 0, '
 # changes nameWithOwner) cannot silently re-inflate the LOC total by millions again.
 LOC_EXCLUDE_NAMES = {'GP1_GRP04', 'VampSurvEX', 'AI---Project-Kim', 'NPA'}
 
+# Commits left out of the Lines-of-Code total, per repo name. They still count as commits.
+# GitHub reports a merge commit with the PR's whole diff, so a listed PR also excludes its
+# "Merge pull request #N" (or squashed "... (#N)") commit.
+LOC_EXCLUDE_COMMITS = {
+    'Stockholm1646': {
+        # PR #449: Wwise 2025.1.12 integration, ~420K lines of Audiokinetic code
+        'ed7f0ef8d3b32496dec000ce9af8065c4522c488',
+        '5a1e8c48101135dd1f431573c86241d12489431a',
+        'f65472551f9d04a8b17432a221b45c7f930ca735',
+    },
+}
+LOC_EXCLUDE_PULL_REQUESTS = {'Stockholm1646': {449}}
+
 
 class AntiAbuseLimit(Exception):
     """Raised when GitHub answers 403 — the undocumented anti-abuse limit was hit"""
@@ -37,6 +50,17 @@ def loc_excluded(name_with_owner):
     e.g. 'GitJamieK/NPA' and 'SomeOrg/NPA' are both excluded
     """
     return name_with_owner.split('/')[-1] in LOC_EXCLUDE_NAMES
+
+
+def loc_commit_excluded(repo_name, commit):
+    """
+    Returns True if this commit's additions/deletions should be left out of the LOC total
+    """
+    if commit['oid'] in LOC_EXCLUDE_COMMITS.get(repo_name, ()):
+        return True
+    headline = commit['messageHeadline']
+    return any(headline.startswith(f'Merge pull request #{pr} ') or headline.endswith(f'(#{pr})')
+               for pr in LOC_EXCLUDE_PULL_REQUESTS.get(repo_name, ()))
 
 
 def daily_readme(birthday):
@@ -159,6 +183,8 @@ def recursive_loc(owner, repo_name, count_diffs=True):
                                 node {
                                     ... on Commit {
                                         committedDate
+                                        oid
+                                        messageHeadline
                                     }
                                     author {
                                         user {
@@ -207,6 +233,8 @@ def recursive_loc(owner, repo_name, count_diffs=True):
         for node in history['edges']:
             if node['node']['author']['user'] == OWNER_ID:
                 my_commits += 1
+                if loc_commit_excluded(repo_name, node['node']):
+                    continue
                 addition_total += node['node'].get('additions', 0)
                 deletion_total += node['node'].get('deletions', 0)
 
